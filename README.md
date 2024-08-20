@@ -1,4 +1,4 @@
-# Data Analysis Project
+# Paintings Analysis: SQL & Pandas Implementation
 
 ## Data Source
 [Dataset Link](https://data.world/atlas-query/paintings)
