@@ -1,6 +1,6 @@
 # Paintings Analysis: SQL & Pandas Implementation
 
-## Data Source [Dataset Link](https://data.world/atlas-query/paintings)
+## Data Source [cick here](https://data.world/atlas-query/paintings)
 
 ## Overview
 This project involves analyzing a dataset related to famous artworks, focusing on canvas sizes, pricing, and data cleaning operations. It includes a Python script to load data into a PostgreSQL database and SQL queries to perform analysis and data cleaning.
