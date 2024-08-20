@@ -149,6 +149,24 @@ group by 1 having count(*) > 1
 --- 12. Identify the artist and the museum where the most expensive and least expensive painting is placed. 
 Display the artist name, sale_price, painting name, museum name, museum city and canvas label
 
+with cte as (
+select work_id, sale_price from  product_size 
+where sale_price = (select max(sale_price) from product_size)
+union
+select work_id, sale_price from  product_size 
+where sale_price = (select min(sale_price) from product_size))
+
+select distinct w.work_id, a.full_name, p.sale_price, m.name as museum_name, w.name as painting_name , c.label as canvas_label
+from work w 
+join artist a on w.artist_id = a.artist_id
+join museum m on w.museum_id = m.museum_id
+join product_size p on p.work_id = w.work_id
+join canvas_size c on p.size_id = c.size_id::text
+where (w.work_id, p.sale_price) in (select * from cte)
+order by 1
+
+-----------------Alternate way
+
 with cte as 
 		(select *
 		, rank() over(order by sale_price desc) as rnk
@@ -167,6 +185,7 @@ with cte as
 	join artist a on a.artist_id=w.artist_id
 	join canvas_size cz on cz.size_id = cte.size_id::NUMERIC
 	where rnk=1 or rnk_asc=1
+	
 	
 	
 13. Which artist has the most no of Portraits paintings outside USA?. Display artist name, no of paintings and the artist nationality.
